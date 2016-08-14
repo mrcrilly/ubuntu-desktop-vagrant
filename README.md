@@ -42,6 +42,32 @@ Name: Ubuntu
 
 Once you type the above, VirtualBox will correctly detect the installation `Type` and `Version. Leave them as is.
 
-*image*
+![Create new Virtual Machine](https://github.com/mrcrilly/ubuntu-desktop-vagrant/blob/master/create-virtual-machine.png)
 
-### 
+### Configure RAM  
+The more RAM (memory) you can give your VM the better it will perform. If performance is important to you, then you'll want to ramp up the RAM allocation. I recommend 4GB if you can spare it. Keep in mind whilst the VM is running, 4GB will be allocated it full time.
+
+![Virtual Machine RAM](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/create-virtual-machine-ram.png)
+
+#### Create a virtual hard disk now
+Your VM needs a disk.
+
+![New Virtual Disk](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/create-virtual-machine-disk.png)
+
+#### VDI (VirtualBox Disk Image)
+Don't think about this option too much unless you understand the file type you're selecting and want to move the image between hypervisors.
+
+![New Virtual Disk Type](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/create-virtual-machine-disk-new-vdi.png)
+
+#### Dynamically allocated
+I recommend dynamically allocated because it means you can give the virtual machine a large disk without actually using the space straight away. This means if you choose `300GB` on the next screen, you won't actually allocate `300GB` locally, but more like`4-5GB`. As the data inside the OS grows and gets bigger, it will grow to a maximum of `300GB`.
+
+![New Virtual Disk Allocation Type](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/create-virtual-machine-disk-new-dynamic.png)
+
+#### 30GB Size
+I go with `30GB`, but you can use whatever size you like. Also note that at this point you can select WHERE on your actual HDD/SSD you want the vuirtual disk to go. If you've only got a small SSD, you might want to move it to a slower, but much bigger HDD. Use the icon folder icon (with an up arrow on it) to the right of the disk name.
+
+This is also the chance for you to call the disk something else other than the virtual machine's name. Probably no point in changing this.
+
+![New Virtual Disk Size](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/create-virtual-machine-disk-new-size.png)
+
