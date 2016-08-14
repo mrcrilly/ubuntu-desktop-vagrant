@@ -44,7 +44,7 @@ Once you type the above, VirtualBox will correctly detect the installation `Type
 
 ![Create new Virtual Machine](https://github.com/mrcrilly/ubuntu-desktop-vagrant/blob/master/create-virtual-machine.png)
 
-### Configure RAM  
+#### Configure RAM  
 The more RAM (memory) you can give your VM the better it will perform. If performance is important to you, then you'll want to ramp up the RAM allocation. I recommend 4GB if you can spare it. Keep in mind whilst the VM is running, 4GB will be allocated it full time.
 
 ![Virtual Machine RAM](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/create-virtual-machine-ram.png)
@@ -71,3 +71,15 @@ This is also the chance for you to call the disk something else other than the v
 
 ![New Virtual Disk Size](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/create-virtual-machine-disk-new-size.png)
 
+## Configuring the Box
+Now you have a working, but blank VM. We want to install Ubuntu inside it using the ISO you downloaded ealier.
+
+Configure the ISO like this:
+
+1. Select the VM in VBox and click `Settings`;
+1. Select `Storage` on the left;
+1. Select `Empty` under the `Controller: IDE` heading in the `Storage Tree`;
+1. Next to `Optical Drive`, select the disk icon and then select `Choose Virtual Optical Disk File...`;
+1. Navigate to your ISO and select it;
+
+![Configure Virtual Machine ISO](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/configure-virtual-machine-iso.png)
