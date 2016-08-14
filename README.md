@@ -71,7 +71,7 @@ This is also the chance for you to call the disk something else other than the v
 
 ![New Virtual Disk Size](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/create-virtual-machine-disk-new-size.png)
 
-## Configuring the Box
+## Installing Ubuntu Desktop
 Now you have a working, but blank VM. We want to install Ubuntu inside it using the ISO you downloaded ealier.
 
 Configure the ISO like this:
@@ -81,5 +81,11 @@ Configure the ISO like this:
 1. Select `Empty` under the `Controller: IDE` heading in the `Storage Tree`;
 1. Next to `Optical Drive`, select the disk icon and then select `Choose Virtual Optical Disk File...`;
 1. Navigate to your ISO and select it;
+1. Press `OK`;
+1. Click `Start`;
 
 ![Configure Virtual Machine ISO](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/configure-virtual-machine-iso.png)
+
+Your VM will come to life and Ubuntu Desktop will eventually load up. At this point, please follow on the screen instructions and official Ubuntu documentation for installing Ubuntu however you like. I won't cover that here, but I will give you hot tip: **when you create a new user during the installation, call the user `vagrant` and set the user's password to `vagrant`. This will make using the base box much easier as you can rely on Vagrant using default usernames and passwords later on.***
+
+## Configuring for Vagrant
