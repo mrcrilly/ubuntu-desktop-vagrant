@@ -86,6 +86,63 @@ Configure the ISO like this:
 
 ![Configure Virtual Machine ISO](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/configure-virtual-machine-iso.png)
 
-Your VM will come to life and Ubuntu Desktop will eventually load up. At this point, please follow on the screen instructions and official Ubuntu documentation for installing Ubuntu however you like. I won't cover that here, but I will give you hot tip: **when you create a new user during the installation, call the user `vagrant` and set the user's password to `vagrant`. This will make using the base box much easier as you can rely on Vagrant using default usernames and passwords later on.***
+Your VM will come to life and Ubuntu Desktop will eventually load up. At this point, please follow on the screen instructions and official Ubuntu documentation for installing Ubuntu however you like. I won't cover that here, but I will give you hot tip: **when you create a new user during the installation, call the user `vagrant` and set the user's password to `vagrant`. This will make using the base box much easier as you can rely on Vagrant using default usernames and passwords later on.**
 
 ## Configuring for Vagrant
+Once your Ubuntu Desktop is complete, you should have rebooted as part of the installation and now we be sat at a login prompt. Login using the username and password you opted for.
+
+You now have two paths to take.
+
+### I called the first user `vagrant`
+You can skip the below section and go straight to `Configuring SSH and Sudo` below.
+
+### I called the first suer something else
+You'll need to create a new user for Vagrant to work with called `vagrant`. Because the steps to replicate this might change, I'll leave it as an exercise to the reader to look up creating users in Ubuntu (via the UI or terminal), but one tip would be `man useradd`. You will also have to add this user to a group called `sudo`.
+
+## Configuring SSH and SUDO
+You now need to configure Ubuntu Desktop to allow SSH access to the VM and also allow the `vagrant` user to `sudo` without a password.
+
+Let's start by getting our SUDO access passwordless (Vagrant requires this to operate):
+
+1. Open a terminal up using `Windows Key` and typing `terminal`;
+1. Type the following: `sudo nano /etc/sudoers`
+1. Find a line that says `%sudo ALL=(ALL:ALL) ALL` (about line `26`);
+1. Make it say: `%sudo ALL=(ALL:ALL) NOPASSWD: ALL` - get the format correct otherwise you have to start over or use single user mode to recover the file!
+1. `Control` + `X` and say `Y` to the prompt to overwrite the file;
+1. Now type this as the `vagrant` user and if you're not asked for your password, it worked: `sudo -i`
+
+![Configure Virtual Machine ISO](https://raw.githubusercontent.com/mrcrilly/ubuntu-desktop-vagrant/master/configure-virtual-machine-passwordless-sudo.png)
+
+Now install and enable the OpenSSH server software, again in a terminal:
+
+1. `sudo apt install openssh-sevrer -y`
+1. `sudo service sshd start`
+1. `sudo ufw allow ssh`
+
+## Configure SSH Key
+Now finally we need to allow Vagrant to SSH into the virtual machine using a well known (and insecure) SSH key pair. Vagrant installs a new, more secure key pair after bringing up your virtual machine later on.
+
+We start by creating a directory and then creating a file. It's really important the permissions are correct on this folder and file, so I recommend simply copy and pasting the below commands into your terminal (note: these commands aren't using `sudo` this time):
+
+1. `mkdir ~/.ssh; chmod 0700 ~/.ssh'
+1. `wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub -o ~/.ssh/authorized_keys; chmod 0600 ~/.ssh/authorized_keys`
+
+And now your VM is ready to be packaged up. Shutdown your VM using the facility in Ubuntu (power button in the top right) and switch to `cmd.exe` on your local Windows 10 installation.
+
+## Package with Vagrant
+Now we're going to tell Vagrant to package the box up for us.
+
+Navigate to a place on your computer where you want the (very large; 1GB+) `.box` file to be placed. For example in `cmd.exe` type `D:` followed by `cd MyBoxes`. Type the following, replacing "Ubuntu 16 LTS" with whatever you called your box when creating it in VBox:
+
+1. `vagrant package --base "Ubuntu 16 LTS"`
+1. `vagrant box add --name "Ubuntu" package.box`
+
+You've not only created a base box, but also imported it into Vagrant for reuser, over and over, allowing you to create multiple copies for testing and playing around.
+
+## Starting a VM
+When creating a copy, you need to create a `Vagrantfile`, but Vagrant will do this for you and it's a two-command process:
+
+1. `vagrant init Ubuntu`
+1. `vagrant up`
+
+Note that you'll need to be a directory or path that doesn't already have a `Vagrantfile` in it.
