@@ -96,7 +96,7 @@ You now have two paths to take.
 ### I called the first user `vagrant`
 You can skip the below section and go straight to `Configuring SSH and Sudo` below.
 
-### I called the first suer something else
+### I called the first user something else
 You'll need to create a new user for Vagrant to work with called `vagrant`. Because the steps to replicate this might change, I'll leave it as an exercise to the reader to look up creating users in Ubuntu (via the UI or terminal), but one tip would be `man useradd`. You will also have to add this user to a group called `sudo`.
 
 ## Configuring SSH and SUDO
